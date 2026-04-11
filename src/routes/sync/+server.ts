@@ -5,6 +5,27 @@ import { eq, and, sql } from "drizzle-orm";
 import type { RequestHandler } from "./$types";
 import typia, { tags, TypeGuardError } from "typia";
 
+const allowedOrigins = ['http://localhost:5173', 'https://benben.sbs', 'https://aws.benben.sbs', 'https://eo.benben.sbs'];
+
+const corsHeaders = (origin: string) => ({
+	'Access-Control-Allow-Origin': origin,
+	'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+	'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+	'Access-Control-Allow-Credentials': 'true',
+});
+
+export const OPTIONS: RequestHandler = async ({ request }) => {
+	const origin = request.headers.get('origin');
+    
+	if (origin && allowedOrigins.includes(origin)) {
+		return new Response(null, {
+			headers: corsHeaders(origin)
+		});
+	}
+
+	return new Response(null, { status: 204 });
+};
+
 export const GET: RequestHandler = async ({ url, locals }) => {
 	if (!locals.user) throw error(401, "Unauthorized");
 
