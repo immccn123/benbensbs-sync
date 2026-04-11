@@ -24,7 +24,7 @@ export const load: PageServerLoad = async ({ url, cookies, fetch, locals }) => {
 	cookies.delete("oauth_state", { path: "/" });
 
 	try {
-		const tokenResponse = await fetch("https://auth.luogu.me/api/oauth/token", {
+		const tokenResponse = await fetch("https://www.cpoauth.com/api/oauth/token", {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
@@ -46,7 +46,7 @@ export const load: PageServerLoad = async ({ url, cookies, fetch, locals }) => {
 
 		const { access_token } = await tokenResponse.json();
 
-		const userResponse = await fetch("https://auth.luogu.me/api/oauth/userinfo", {
+		const userResponse = await fetch("https://www.cpoauth.com/api/oauth/userinfo", {
 			headers: {
 				Authorization: `Bearer ${access_token}`,
 			},
@@ -99,7 +99,7 @@ export const load: PageServerLoad = async ({ url, cookies, fetch, locals }) => {
 			path: "/",
 			httpOnly: true,
 			secure: true,
-			sameSite: "strict",
+			sameSite: "none",
 			maxAge: 60 * 60 * 24 * 2, // 2 days
 		});
 
