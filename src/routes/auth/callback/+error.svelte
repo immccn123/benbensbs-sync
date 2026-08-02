@@ -51,14 +51,14 @@
 
 			<div class="space-y-4">
 				<p class="text-xs leading-relaxed opacity-60 italic">
-					鉴权尝试失败。可能是由于无效的 CSRF 令牌、OAuth
+					鉴权尝试失败。可能是由于无效的 CSRF 令牌、SSO
 					状态不匹配或远程服务器响应异常引起的。
 				</p>
 
 				<div class="flex flex-col gap-3 pt-2">
 					<a
 						class="btn btn-outline btn-block rounded-none font-bold tracking-widest group relative overflow-hidden"
-						href="/auth/login"
+						href="/endpoint/login"
 					>
 						<span class="relative z-10">重试请求 / RE-INITIATE</span>
 					</a>
@@ -68,7 +68,7 @@
 
 		<footer class="mt-12 pt-4 border-t border-base-content/5 flex justify-between items-end">
 			<div class="text-[10px] font-mono opacity-40">
-				MODULE: OAUTH_CALLBACK<br />
+				MODULE: SSO_CALLBACK<br />
 				TRACE: {Date.now().toString(16).toUpperCase()}
 			</div>
 			<div class="flex gap-1">

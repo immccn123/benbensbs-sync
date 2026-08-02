@@ -77,3 +77,8 @@ export const powChallenge = pgTable("pow_challenge", {
 	minDifficulty: integer("min_difficulty").notNull(),
 	deadline: timestamp("deadline", { withTimezone: true }).notNull(),
 });
+
+export const revokedSession = pgTable("revoked_session", {
+	jti: text("jti").primaryKey(),
+	exp: timestamp("exp", { withTimezone: true }).notNull(),
+});

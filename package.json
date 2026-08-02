@@ -13,10 +13,16 @@
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "db:studio": "drizzle-kit studio"
+    "db:studio": "drizzle-kit studio",
+    "codegen": "graphql-codegen --config codegen.ts"
   },
   "devDependencies": {
     "@deno/svelte-adapter": "^0.1.1",
+    "@graphql-codegen/cli": "^7.2.0",
+    "@graphql-codegen/import-types-preset": "^4.0.1",
+    "@graphql-codegen/schema-ast": "^6.1.0",
+    "@graphql-codegen/typescript": "^6.1.0",
+    "@graphql-codegen/typescript-operations": "^6.1.2",
     "@sveltejs/adapter-auto": "^7.0.0",
     "@sveltejs/kit": "^2.50.2",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
@@ -37,6 +43,8 @@
   },
   "dependencies": {
     "@types/sm-crypto": "^0.3.4",
+    "graphql": "^17.0.2",
+    "graphql-request": "^7.4.0",
     "jose": "^6.2.2",
     "nanoid": "^5.1.7",
     "node-fetch-with-proxy": "^0.1.6",

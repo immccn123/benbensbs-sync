@@ -4,8 +4,9 @@ import { powChallenge } from "$lib/server/db/schema";
 import { getUpdatedRisk } from "$lib/server/pow";
 import { eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
+import type { RequestHandler } from "./$types";
 
-export const GET = async ({ locals }) => {
+export const GET: RequestHandler = async ({ locals }) => {
 	if (!locals.user) throw error(401, "Unauthorized");
 	const userId = locals.user.id;
 

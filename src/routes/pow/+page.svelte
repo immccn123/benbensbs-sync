@@ -58,7 +58,7 @@
 		errorMessage = "";
 		try {
 			fetching = true;
-			const res = await fetch("/pow/challenge");
+			const res = await fetch("/endpoint/pow/challenge");
 			if (!res.ok) throw new Error();
 			const data = await res.json();
 			nonce = data.nonce;
@@ -102,7 +102,7 @@
 
 	const verifyAndFinish = async (answer: string) => {
 		try {
-			const res = await fetch("/pow/verify", {
+			const res = await fetch("/endpoint/pow/verify", {
 				method: "POST",
 				body: JSON.stringify({ answer }),
 				headers: { "Content-Type": "application/json" },

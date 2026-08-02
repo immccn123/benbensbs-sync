@@ -1,7 +1,7 @@
 import { redirect } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 import { nanoid } from "nanoid";
-import { CLIENT_ID, OAUTH_CALLBACK_URL } from "$env/static/private";
+import { SSO_URL, SSO_APP_ID, SSO_CALLBACK_URL, SSO_APP_CREDENTIAL } from "$env/static/private";
 
 export const GET: RequestHandler = async ({ cookies, locals }) => {
 	if (locals.user) {
@@ -10,7 +10,7 @@ export const GET: RequestHandler = async ({ cookies, locals }) => {
 
 	const state = nanoid();
 
-	cookies.set("oauth_state", state, {
+	cookies.set("sso_state", state, {
 		path: "/",
 		httpOnly: true,
 		maxAge: 60 * 10,
@@ -18,12 +18,11 @@ export const GET: RequestHandler = async ({ cookies, locals }) => {
 	});
 
 	const authUrl =
-		`https://auth.luogu.me/oauth/authorize?` +
+		`${SSO_URL}/flow/auth?` +
 		new URLSearchParams({
-			client_id: CLIENT_ID,
-			redirect_uri: OAUTH_CALLBACK_URL,
-			response_type: "code",
-			scope: "openid profile",
+			app_id: SSO_APP_ID,
+			callback_url: SSO_CALLBACK_URL,
+			credential: SSO_APP_CREDENTIAL,
 			state,
 		});
 

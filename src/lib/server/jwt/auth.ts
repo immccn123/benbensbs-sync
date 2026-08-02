@@ -1,28 +1,29 @@
-import { SignJWT, jwtVerify, importPKCS8, importSPKI, type JWTPayload } from "jose";
-import { JWT_PRIVATE_KEY, JWT_PUBLIC_KEY } from "$env/static/private";
+import { jwtVerify, importSPKI, decodeJwt, type JWTPayload } from "jose";
+import { SSO_JWT_VERIFY_KEY, SSO_APP_ID, SSO_URL } from "$env/static/private";
 
 const ALG = "ES256";
 
-const privateKey = await importPKCS8(JWT_PRIVATE_KEY, ALG);
-const publicKey = await importSPKI(JWT_PUBLIC_KEY, ALG);
+const verifyKey = await importSPKI(SSO_JWT_VERIFY_KEY, ALG);
 
-interface Payload extends JWTPayload {
+export interface SsoPayload extends JWTPayload {
 	sub: string;
+	jti: string;
+	display_name?: string;
+	avatar_url?: string;
 }
 
-export const createToken = (payload: Payload, expires = "48h", issuedAt = new Date()) =>
-	new SignJWT(payload)
-		.setProtectedHeader({ alg: ALG })
-		.setIssuedAt(issuedAt)
-		.setExpirationTime(expires)
-		.sign(privateKey);
+export const verifySsoToken = async (token: string): Promise<SsoPayload> => {
+	const { payload } = await jwtVerify(token, verifyKey, {
+		algorithms: [ALG],
+		audience: SSO_APP_ID,
+		issuer: SSO_URL,
+	});
+	return payload as SsoPayload;
+};
 
-export const verifyToken = async (token: string) => {
+export const decodeSsoToken = (token: string) => {
 	try {
-		const { payload } = await jwtVerify(token, publicKey, {
-			algorithms: [ALG],
-		});
-		return payload;
+		return decodeJwt(token);
 	} catch {
 		return null;
 	}

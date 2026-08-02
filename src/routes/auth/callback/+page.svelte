@@ -60,7 +60,7 @@
 			<div class="space-y-3">
 				<p class="text-sm leading-relaxed opacity-80 border-l-2 border-success/30 pl-3">
 					鉴权协议已完成。您的身份已通过 <span class="text-success font-bold"
-						>CP OAuth</span
+						>SSO</span
 					> 验证。
 				</p>
 
@@ -81,7 +81,7 @@
 
 		<footer class="mt-12 pt-4 border-t border-base-content/5 flex justify-between items-end">
 			<div class="text-[10px] font-mono opacity-40">
-				PROTOCOL: OAUTH 2.0<br />
+				PROTOCOL: SSO / JWT<br />
 				STATUS: SESSION_ACTIVE
 			</div>
 			<div class="flex gap-1">

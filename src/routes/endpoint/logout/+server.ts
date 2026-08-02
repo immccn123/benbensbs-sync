@@ -1,9 +1,10 @@
-import type { PageServerLoad } from "./$types";
+import { json } from "@sveltejs/kit";
+import type { RequestHandler } from "./$types";
 import { decodeSsoToken } from "$lib/server/jwt/auth";
 import { db } from "$lib/server/db";
 import { revokedSession } from "$lib/server/db/schema";
 
-export const load: PageServerLoad = async ({ cookies, locals }) => {
+export const POST: RequestHandler = async ({ cookies }) => {
 	const token = cookies.get("sso_token");
 
 	if (token) {
@@ -20,9 +21,5 @@ export const load: PageServerLoad = async ({ cookies, locals }) => {
 	}
 
 	cookies.delete("sso_token", { path: "/" });
-
-	if (locals.user) {
-		return { user: locals.user };
-	}
-	return {};
+	return json({ success: true });
 };

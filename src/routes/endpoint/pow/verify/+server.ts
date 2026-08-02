@@ -3,8 +3,9 @@ import { db } from "$lib/server/db";
 import { powChallenge, powInfo } from "$lib/server/db/schema";
 import { verifySha256PoW, getUpdatedRisk } from "$lib/server/pow";
 import { eq } from "drizzle-orm";
+import type { RequestHandler } from "./$types";
 
-export const POST = async ({ request, locals }) => {
+export const POST: RequestHandler = async ({ request, locals }) => {
 	if (!locals.user) throw error(401, "Unauthorized");
 	const { answer } = await request.json();
 	const userId = locals.user.id;

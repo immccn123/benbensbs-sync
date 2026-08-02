@@ -93,7 +93,7 @@
 
 		<footer class="mt-12 pt-4 border-t border-base-content/5 flex justify-between items-end">
 			<div class="text-[10px] font-mono opacity-40">
-				PROTOCOL: OAUTH 2.0<br />
+				PROTOCOL: SSO / JWT<br />
 				STATUS: {isLoggedOutSession ? "SESSION_TERMINATED" : "NOT_AUTHENTICATED"}
 			</div>
 			<div class="flex gap-1">
