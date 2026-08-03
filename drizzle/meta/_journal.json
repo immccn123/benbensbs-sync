@@ -15,6 +15,20 @@
       "when": 1785599554730,
       "tag": "0001_lucky_silk_fever",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1785740527065,
+      "tag": "0002_bent_dorian_gray",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1785742480432,
+      "tag": "0003_foamy_rocket_raccoon",
+      "breakpoints": true
     }
   ]
 }

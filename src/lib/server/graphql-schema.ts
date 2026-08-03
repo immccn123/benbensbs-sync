@@ -431,6 +431,8 @@ export type Query = Node & {
    * which can only query top level fields if they are in a particular form.
    */
   query: Query;
+  /** Reads and enables pagination through a set of `Feed`. */
+  sampledFeedsByRange?: Maybe<FeedConnection>;
   /** Reads a single `TakedownBatch` using its globally unique `ID`. */
   takedownBatch?: Maybe<TakedownBatch>;
   /** Get a single `TakedownBatch`. */
@@ -537,6 +539,18 @@ export type QueryFeedTakedownByRowIdArgs = {
 /** The root query type which gives access points into the data universe. */
 export type QueryNodeArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+/** The root query type which gives access points into the data universe. */
+export type QuerySampledFeedsByRangeArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  endTime?: InputMaybe<Scalars['Datetime']['input']>;
+  filter?: InputMaybe<FeedFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  sampleLimit?: InputMaybe<Scalars['Int']['input']>;
+  startTime?: InputMaybe<Scalars['Datetime']['input']>;
 };
 
 

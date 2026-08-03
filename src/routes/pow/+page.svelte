@@ -1,6 +1,7 @@
 <script lang="ts">
 	import PoWWorker from "./pow.worker?worker";
 	import { onDestroy, onMount } from "svelte";
+	import SignalBars from "$lib/components/SignalBars.svelte";
 
 	let stage = $state("idle");
 	let errorMessage = $state("");
@@ -269,29 +270,9 @@
 					>{stage === "processing" ? "CALCULATING" : stage.toUpperCase()}</span
 				>
 			</div>
-			<div class="flex gap-1">
-				<div
-					class="w-8 h-1 transition-colors duration-300 {stage === 'done'
-						? 'bg-success'
-						: stage === 'error'
-							? 'bg-error'
-							: 'bg-primary'}"
-				></div>
-				<div
-					class="w-2 h-1 transition-colors duration-300 {stage === 'done'
-						? 'bg-success/40'
-						: stage === 'error'
-							? 'bg-error/40'
-							: 'bg-primary/40'}"
-				></div>
-				<div
-					class="w-2 h-1 transition-colors duration-300 {stage === 'done'
-						? 'bg-success/20'
-						: stage === 'error'
-							? 'bg-error/20'
-							: 'bg-primary/20'}"
-				></div>
-			</div>
+			<SignalBars
+				accent={stage === "done" ? "success" : stage === "error" ? "error" : "primary"}
+			/>
 		</footer>
 	</div>
 </div>

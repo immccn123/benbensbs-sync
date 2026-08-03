@@ -713,6 +713,29 @@ type Query implements Node {
   """
   query: Query!
 
+  """Reads and enables pagination through a set of `Feed`."""
+  sampledFeedsByRange(
+    """Read all values in the set after (below) this cursor."""
+    after: Cursor
+    endTime: Datetime
+
+    """
+    A filter to be used in determining which values should be returned by the collection.
+    """
+    filter: FeedFilter
+
+    """Only read the first `n` values of the set."""
+    first: Int
+
+    """
+    Skip the first `n` values from our `after` cursor, an alternative to cursor
+    based pagination. May not be used with `last`.
+    """
+    offset: Int
+    sampleLimit: Int
+    startTime: Datetime
+  ): FeedConnection
+
   """Reads a single `TakedownBatch` using its globally unique `ID`."""
   takedownBatch(
     """

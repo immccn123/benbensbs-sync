@@ -1,11 +1,12 @@
 import { error, redirect } from "@sveltejs/kit";
-import type { RequestHandler } from "./$types";
+import type { PageServerLoad } from "./$types";
 import { verifySsoToken } from "$lib/server/jwt/auth";
 import { db } from "$lib/server/db";
 import { user, revokedSession } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
+import { sanitizeReturnTo } from "$lib/server/return-to";
 
-export const GET: RequestHandler = async ({ url, cookies }) => {
+export const load: PageServerLoad = async ({ url, cookies }) => {
 	const state = url.searchParams.get("state");
 	const token = url.searchParams.get("token");
 	const stateCookie = cookies.get("sso_state");
@@ -72,5 +73,8 @@ export const GET: RequestHandler = async ({ url, cookies }) => {
 		maxAge,
 	});
 
-	throw redirect(302, "/auth/callback");
+	const returnTo = sanitizeReturnTo(cookies.get("sso_return_to"));
+	cookies.delete("sso_return_to", { path: "/" });
+
+	throw redirect(302, returnTo ?? "/auth/callback");
 };

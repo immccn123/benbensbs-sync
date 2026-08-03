@@ -43,13 +43,9 @@ export const authHandle: Handle = async ({ event, resolve }) => {
 				avatarUrl: payload.avatar_url ?? loginUser.avatarUrl,
 			};
 		} catch (e) {
-			if (typeof e === "string") {
-				event.cookies.delete("sso_token", { path: "/" });
-			} else {
-				throw e;
-			}
+			event.cookies.delete("sso_token", { path: "/" });
 		}
 	}
 
-	return resolve(event);
+	return await resolve(event);
 };

@@ -16,5 +16,16 @@ const cleanupRevokedSessions = () =>
 		.where(lt(schema.revokedSession.exp, new Date()))
 		.catch(() => {});
 
-cleanupRevokedSessions();
-setInterval(cleanupRevokedSessions, 3_600_000);
+const cleanupExpiredCcbPuzzles = () =>
+	db
+		.delete(schema.ccbPuzzle)
+		.where(lt(schema.ccbPuzzle.expiresAt, new Date()))
+		.catch(() => {});
+
+const runCleanup = () => {
+	cleanupRevokedSessions();
+	cleanupExpiredCcbPuzzles();
+};
+
+runCleanup();
+setInterval(runCleanup, 3_600_000);

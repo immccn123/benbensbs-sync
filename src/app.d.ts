@@ -14,6 +14,7 @@ declare global {
 		// interface Platform {}
 		interface Locals {
 			user?: User;
+			sessionInvalid?: boolean;
 		}
 	}
 }

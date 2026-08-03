@@ -1,0 +1,14 @@
+/* CCB type + a couple of helpers. Everything else is clean-line Tailwind. */
+
+.font-display {
+	font-family: Bahnschrift, "DIN Alternate", "Franklin Gothic Medium",
+		"Arial Narrow", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.font-body {
+	font-family: "Segoe UI", system-ui, -apple-system, "Helvetica Neue",
+		"PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+.img-pixelated {
+	image-rendering: pixelated;
+}

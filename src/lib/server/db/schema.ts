@@ -9,6 +9,7 @@ import {
 	varchar,
 	unique,
 	index,
+	primaryKey,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
@@ -81,4 +82,42 @@ export const powChallenge = pgTable("pow_challenge", {
 export const revokedSession = pgTable("revoked_session", {
 	jti: text("jti").primaryKey(),
 	exp: timestamp("exp", { withTimezone: true }).notNull(),
+});
+
+export const ccbPuzzle = pgTable(
+	"ccb_puzzle",
+	{
+		tmpId: varchar("tmp_id", { length: 21 }).primaryKey(),
+		rowId: integer("row_id").notNull(),
+		userId: integer("user_id")
+			.notNull()
+			.references(() => user.id, { onDelete: "cascade" }),
+		status: varchar("status", { length: 16 }).notNull().default("pending"),
+		createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+		expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+	},
+	(t) => [
+		index("ccb_puzzle_user_created_idx").on(t.userId, t.createdAt),
+		index("ccb_puzzle_row_id_idx").on(t.rowId),
+		index("ccb_puzzle_expires_idx").on(t.expiresAt),
+	],
+);
+
+export const ccbOptionStat = pgTable(
+	"ccb_option_stat",
+	{
+		rowId: integer("row_id").notNull(),
+		option: varchar("option", { length: 16 }).notNull(),
+		count: integer("count").notNull().default(0),
+	},
+	(t) => [primaryKey({ columns: [t.rowId, t.option] })],
+);
+
+export const ccbUserStat = pgTable("ccb_user_stat", {
+	userId: integer("user_id")
+		.primaryKey()
+		.references(() => user.id, { onDelete: "cascade" }),
+	total: integer("total").notNull().default(0),
+	offsetSum: integer("offset_sum").notNull().default(0),
+	correctSum: integer("correct_sum").notNull().default(0),
 });

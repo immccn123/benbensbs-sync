@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { onMount } from "svelte";
+	import DotGrid from "$lib/components/DotGrid.svelte";
+	import ActionCard from "$lib/components/ActionCard.svelte";
 
 	let sessionUser = $state<{
 		id: number;
@@ -41,10 +43,7 @@
 </script>
 
 <div class="min-h-screen bg-base-100 p-8 font-mono tracking-tight text-base-content">
-	<div
-		class="fixed inset-0 opacity-[0.03] pointer-events-none"
-		style="background-image: radial-gradient(#000 1px, transparent 1px); background-size: 20px 20px;"
-	></div>
+	<DotGrid />
 
 	<div class="container mx-auto relative border-l-2 border-primary pl-6 py-4">
 		<div class="flex items-center gap-4 mb-2 opacity-70">
@@ -56,7 +55,7 @@
 
 		<h1 class="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">
 			benben.sbs <br />
-			<span class="text-primary">AIO Online</span>
+			<span class="text-primary">OLSI Platform</span>
 		</h1>
 
 		<div class="grid grid-cols-1 md:grid-cols-12 gap-8 border-t border-base-content/20 pt-8">
@@ -65,17 +64,6 @@
 					[ 核心数据同步协议 ] <br />
 					这里是犇站的配置同步中心服务。这里同时会提供认证、授权、工作量验证和合订本的接口服务。
 				</p>
-
-				<div class="flex gap-2">
-					<div
-						class="badge badge-outline rounded-none px-4 py-3 text-xs font-bold border-primary text-primary"
-					>
-						ECC Based Authentication
-					</div>
-					<div class="badge badge-outline rounded-none px-4 py-3 text-xs font-bold">
-						SHA256-POW
-					</div>
-				</div>
 
 				{#if loaded && sessionUser}
 					<div
@@ -154,43 +142,31 @@
 			</div>
 
 			<div class="md:col-span-5 flex flex-col gap-4">
-				<a
-					class="group relative border border-base-content/20 p-4 hover:border-primary transition-colors cursor-pointer bg-base-200/50"
+				<ActionCard
 					href="/endpoint/login"
-				>
-					<div class="flex justify-between items-start">
-						<div>
-							<div class="text-xs opacity-50 mb-1">// ACTION_01</div>
-							<div class="text-lg font-bold uppercase">Authentication</div>
-						</div>
-						<span class="text-xl">_</span>
-					</div>
-					<div
-						class="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-300"
-					></div>
-				</a>
+					label="// ACTION_01"
+					title="Authentication"
+					icon="→"
+					filled
+					underline
+				/>
 
-				<a
-					class="group relative border border-base-content/20 p-4 hover:border-primary transition-colors cursor-pointer"
-					href="https://benben.sbs"
-				>
-					<div class="flex justify-between items-start">
-						<div>
-							<div class="text-xs opacity-50 mb-1">// ACTION_02</div>
-							<div class="text-lg font-bold uppercase">MAIN SITE</div>
-						</div>
-						<span class="text-xl">↗</span>
-					</div>
-				</a>
+				<ActionCard href="https://benben.sbs" label="// ACTION_02" title="MAIN SITE" icon="↗" />
+
+				<ActionCard
+					href="/ccb"
+					label="// ACTION_03"
+					title="洛谷笑传之猜猜犇"
+					icon="→"
+					highlight
+					underline
+				/>
 			</div>
 		</div>
 
 		<div
 			class="mt-20 flex flex-wrap gap-x-12 gap-y-4 opacity-40 text-[10px] uppercase font-bold tracking-widest border-t border-dashed border-base-content/20 pt-4"
 		>
-			<div>Engine: SvelteKit / SM3</div>
-			<div>Auth: JOSE / ECC25519</div>
-			<div>Storage: PostgreSQL / Drizzle</div>
 			<div class="ml-auto text-primary">Authorized Access Only</div>
 		</div>
 	</div>

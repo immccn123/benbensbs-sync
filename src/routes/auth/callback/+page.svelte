@@ -16,7 +16,7 @@
 		class="max-w-md w-full border-l-4 border-success bg-base-100 p-8 relative overflow-hidden ring-1 ring-base-content/10"
 	>
 		<header class="mb-10">
-			<h1 class="text-4xl font-black tracking-tighter uppercase mb-2">Verified</h1>
+			<h1 class="text-4xl font-bold tracking-tighter uppercase mb-2">Verified</h1>
 			<div class="flex items-center gap-2">
 				<span class="bg-success text-success-content text-[10px] px-1 font-bold"
 					>SUCCESS</span

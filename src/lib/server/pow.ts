@@ -11,9 +11,7 @@ export async function getUpdatedRisk(userId: number) {
 
 	const now = new Date();
 	const nowTs = now.getTime();
-	const elapsedSeconds = Math.floor(
-		(nowTs - info.riskLastUpdate.getTime()) / 1000,
-	);
+	const elapsedSeconds = Math.floor((nowTs - info.riskLastUpdate.getTime()) / 1000);
 	const currentRisk = Math.max(0, info.riskValue - elapsedSeconds);
 
 	if (Math.abs(currentRisk - info.riskValue) > 5760 || currentRisk === 0) {
