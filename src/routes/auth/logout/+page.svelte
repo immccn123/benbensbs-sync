@@ -6,6 +6,8 @@
 	const isLoggedOutSession = $derived(!!data.user);
 </script>
 
+<svelte:head><title>Benben.sbs OLSI — Logout</title></svelte:head>
+
 <StatusPanel
 	accent={isLoggedOutSession ? "success" : "warning"}
 	badge={isLoggedOutSession ? "SUCCESS" : "NOTICE"}

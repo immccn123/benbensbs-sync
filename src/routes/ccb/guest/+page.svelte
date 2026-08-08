@@ -104,6 +104,8 @@
 	};
 </script>
 
+<svelte:head><title>Benben.sbs OLSI — CCB 访客模式</title></svelte:head>
+
 <div class="min-h-screen bg-base-100 font-body text-base-content relative">
 	<DotGrid />
 

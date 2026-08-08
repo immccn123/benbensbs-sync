@@ -11,6 +11,8 @@
 	};
 </script>
 
+<svelte:head><title>Benben.sbs OLSI — Verified</title></svelte:head>
+
 <div class="min-h-screen flex items-center justify-center p-4 bg-base-200">
 	<div
 		class="max-w-md w-full border-l-4 border-success bg-base-100 p-8 relative overflow-hidden ring-1 ring-base-content/10"

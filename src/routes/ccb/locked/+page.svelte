@@ -180,6 +180,8 @@
 	const revealed = $derived(result !== null && result.status !== "notfound");
 </script>
 
+<svelte:head><title>Benben.sbs OLSI — CCB ██ 模式</title></svelte:head>
+
 <div class="min-h-screen bg-base-100 font-body text-base-content relative">
 	<DotGrid />
 
@@ -191,7 +193,7 @@
 				>← 返回</a
 			>
 			<span class="text-xs opacity-30">·</span>
-			<span class="text-xs font-bold uppercase tracking-[0.2em]">██████ ████</span>
+			<span class="text-xs font-bold uppercase tracking-[0.2em]">██████ MODE</span>
 		</CcbHeader>
 
 		<div class="flex items-end justify-between gap-4 mt-10 mb-6">
@@ -200,8 +202,8 @@
 				{#if stat.total === 0}
 					<span class="opacity-50">暂无记录</span>
 				{:else}
-					<div>正确率 {accuracyPct}% · 平均偏移 {avgOffset}</div>
-					<div class="opacity-50">共 {stat.total} 次</div>
+					<div>累计正确率, 平均偏移量, 累计次数</div>
+					<div>{accuracyPct}%, {avgOffset}, {stat.total}</div>
 				{/if}
 			</div>
 		</div>

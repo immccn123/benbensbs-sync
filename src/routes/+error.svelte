@@ -20,6 +20,8 @@
 	};
 </script>
 
+<svelte:head><title>Benben.sbs OLSI — Error {page.status}</title></svelte:head>
+
 {#if isSessionInvalid}
 	<div
 		class="min-h-screen flex items-center justify-center p-4 bg-base-200 relative overflow-hidden"

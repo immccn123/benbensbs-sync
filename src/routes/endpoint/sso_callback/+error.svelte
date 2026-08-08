@@ -7,6 +7,8 @@
 	const isPermissionDenied = $derived(status === 403);
 </script>
 
+<svelte:head><title>Benben.sbs OLSI — SSO Error</title></svelte:head>
+
 <StatusPanel
 	accent={isError ? "error" : "warning"}
 	watermark="CRITICAL_FAILURE_LOG_{status}"

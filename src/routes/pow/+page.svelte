@@ -128,6 +128,8 @@
 	});
 </script>
 
+<svelte:head><title>Benben.sbs OLSI — Proof of Work</title></svelte:head>
+
 <div
 	class="min-h-screen flex items-center justify-center p-4 bg-base-200 font-sans text-base-content selection:bg-primary/30"
 >

@@ -28,6 +28,8 @@
 	};
 </script>
 
+<svelte:head><title>Benben.sbs OLSI — CCB</title></svelte:head>
+
 <div class="min-h-screen bg-base-100 font-body text-base-content relative">
 	<DotGrid />
 
@@ -53,9 +55,10 @@
 				rel="noopener noreferrer"
 				class="underline decoration-base-content/30 underline-offset-2 hover:text-primary hover:decoration-primary transition-colors"
 				>Guess the true rating of these users!</a
-			>。 访客模式没有进行后端限制所以你要开 F12
-			看网络请求还是抓包什么的都没人拦着你（x）保证发送时与记录用户颜色间隔不超过
-			24h。你看到的犇犇可能已经被删除。 基于 (<a
+			>。<br />
+			访客模式没有进行后端限制所以你要开 F12 看网络请求还是抓包什么的都没人拦着你（x）保证发送时与记录用户颜色间隔不超过
+			24h。你看到的犇犇可能已经被删除。登录用户可以尝试 ██ 模式。<br />
+			基于 (<a
 				href="https://github.com/EarthMessenger/cai-cai-ben"
 				target="_blank"
 				rel="noopener noreferrer"
@@ -93,13 +96,13 @@
 			>
 				<div class="flex justify-between items-start">
 					<div>
-						<div class="font-mono text-xs opacity-50 mb-1">// ██████ ████</div>
+						<div class="font-mono text-xs opacity-50 mb-1">// ██████ MODE</div>
 						<div
 							class="font-display text-lg uppercase {sessionUser
 								? ''
 								: 'opacity-30 select-none'}"
 						>
-							████
+							██ 模式
 						</div>
 					</div>
 					<span
@@ -137,7 +140,7 @@
 					{#snippet title()}UNVERIFIED{/snippet}
 
 					<p class="text-sm leading-relaxed opacity-80 border-l-2 border-error/30 pl-3">
-						████ 仅对登录用户开放。请先登录。
+						██ 模式 仅对登录用户开放。请先登录。
 					</p>
 
 					<div class="flex flex-col gap-3">
