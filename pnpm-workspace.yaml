@@ -1,4 +1,10 @@
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  - '@sveltejs/vite-plugin-svelte@7.3.0'
 onlyBuiltDependencies:
   - esbuild
+overrides:
+  js-yaml: ^4.3.1
+  cookie: ^0.7.1
+  esbuild: ^0.28.1

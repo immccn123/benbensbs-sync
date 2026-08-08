@@ -2,7 +2,6 @@ import { error, json } from "@sveltejs/kit";
 import type { RequestHandler } from "./$types";
 import { getGraphqlClient, gql } from "$lib/server/graphql";
 import type { FeedSampleQuery, FeedSampleQueryVariables } from "$lib/server/graphql-operations";
-import _chance from "chance";
 import type { Feed } from "$lib/server/graphql-schema";
 
 const FeedSample = gql`
