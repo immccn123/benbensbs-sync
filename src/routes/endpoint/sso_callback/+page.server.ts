@@ -24,7 +24,7 @@ export const load: PageServerLoad = async ({ url, cookies }) => {
 		throw error(401, "Token verification failed");
 	}
 
-	const { sub, iat, jti, exp, display_name, avatar_url } = payload;
+	const { sub, iat, jti, exp, display_name, avatar_url, username } = payload;
 	if (!sub || !iat || !jti) throw error(400, "Incomplete token claims");
 
 	const revoked = await db
@@ -43,7 +43,7 @@ export const load: PageServerLoad = async ({ url, cookies }) => {
 		.limit(1);
 
 	const profileUpdate: { displayName?: string; avatarUrl?: string } = {};
-	if (display_name) profileUpdate.displayName = display_name;
+	if (display_name || username) profileUpdate.displayName = display_name ?? username;
 	if (avatar_url) profileUpdate.avatarUrl = avatar_url;
 
 	if (existingUser) {

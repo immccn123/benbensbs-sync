@@ -1,0 +1,1 @@
+ALTER TABLE "ccb_user_stat" ADD COLUMN "score" double precision DEFAULT -1 NOT NULL;

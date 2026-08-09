@@ -10,6 +10,7 @@ import {
 	unique,
 	index,
 	primaryKey,
+	doublePrecision,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
@@ -113,11 +114,16 @@ export const ccbOptionStat = pgTable(
 	(t) => [primaryKey({ columns: [t.rowId, t.option] })],
 );
 
-export const ccbUserStat = pgTable("ccb_user_stat", {
-	userId: integer("user_id")
-		.primaryKey()
-		.references(() => user.id, { onDelete: "cascade" }),
-	total: integer("total").notNull().default(0),
-	offsetSum: integer("offset_sum").notNull().default(0),
-	correctSum: integer("correct_sum").notNull().default(0),
-});
+export const ccbUserStat = pgTable(
+	"ccb_user_stat",
+	{
+		userId: integer("user_id")
+			.primaryKey()
+			.references(() => user.id, { onDelete: "cascade" }),
+		total: integer("total").notNull().default(0),
+		offsetSum: integer("offset_sum").notNull().default(0),
+		correctSum: integer("correct_sum").notNull().default(0),
+		score: doublePrecision("score").notNull().default(-1),
+	},
+	(t) => [index("ccb_user_stat_score_idx").on(t.score)],
+);

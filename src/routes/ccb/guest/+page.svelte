@@ -4,6 +4,7 @@
 	import DOMPurify from "dompurify";
 	import "../panel.css";
 	import DotGrid from "$lib/components/DotGrid.svelte";
+	import StatusPanel from "$lib/components/StatusPanel.svelte";
 	import CcbHeader from "$lib/components/ccb/CcbHeader.svelte";
 	import CcbTitle from "$lib/components/ccb/CcbTitle.svelte";
 	import ColorOption from "$lib/components/ccb/ColorOption.svelte";
@@ -37,6 +38,19 @@
 	let answered = $state(0);
 	let loadingMore = false;
 
+	const GUEST_WARN_KEY = "ccb-guest-warned";
+	let showWarning = $state(false);
+	let dontShowAgain = $state(false);
+
+	const confirmWarning = () => {
+		if (dontShowAgain) {
+			try {
+				localStorage.setItem(GUEST_WARN_KEY, "1");
+			} catch {}
+		}
+		showWarning = false;
+	};
+
 	const current = $derived(feeds[index] as GuestFeed | undefined);
 	const actualKey = $derived(current ? normalizeColorKey(current.userColor) : "gray");
 	const actualColor = $derived(colorOf(actualKey));
@@ -61,6 +75,9 @@
 	};
 
 	onMount(async () => {
+		try {
+			if (localStorage.getItem(GUEST_WARN_KEY) !== "1") showWarning = true;
+		} catch {}
 		try {
 			feeds = await fetchFeeds();
 			if (feeds.length === 0) throw new Error();
@@ -190,4 +207,43 @@
 			</div>
 		{/if}
 	</div>
+
+	{#if showWarning}
+		<div class="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
+			<div class="relative">
+				<StatusPanel
+					accent="warning"
+					badge="WARN"
+					subtitle="SCORES WILL NOT BE RECORDED"
+					footTop="MODE: GUEST"
+					footBottom="LEADERBOARD: N/A"
+				>
+					{#snippet title()}NO LEADERBOARD{/snippet}
+
+					<p class="text-sm leading-relaxed opacity-80 border-l-2 border-warning/50 pl-3">
+						访客模式的猜测不计入排行榜。登录用户可参与 ██ 模式排行榜。
+					</p>
+
+					<label class="flex items-center gap-2.5 cursor-pointer select-none">
+						<input
+							type="checkbox"
+							bind:checked={dontShowAgain}
+							class="checkbox checkbox-sm rounded-none"
+						/>
+						<span class="text-sm opacity-80">下次不再提醒</span>
+					</label>
+
+					<button
+						class="btn btn-neutral btn-block rounded-none font-bold tracking-widest group relative"
+						onclick={confirmWarning}
+					>
+						<span class="relative z-10">知道了 / OK</span>
+						<div
+							class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"
+						></div>
+					</button>
+				</StatusPanel>
+			</div>
+		</div>
+	{/if}
 </div>

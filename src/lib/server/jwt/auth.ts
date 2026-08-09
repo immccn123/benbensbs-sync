@@ -10,6 +10,7 @@ export interface SsoPayload extends JWTPayload {
 	jti: string;
 	display_name?: string;
 	avatar_url?: string;
+	username?: string;
 }
 
 export const verifySsoToken = async (token: string): Promise<SsoPayload> => {

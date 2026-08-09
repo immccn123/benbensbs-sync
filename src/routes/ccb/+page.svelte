@@ -40,7 +40,7 @@
 				class="text-xs font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors"
 				>← 首页</a
 			>
-			<span class="text-xs opacity-30">·</span>
+			<span class="text-xs opacity-30">|</span>
 			<span class="text-xs font-bold uppercase tracking-[0.2em]">CCB / Mode Selection</span>
 		</CcbHeader>
 
@@ -115,6 +115,25 @@
 					class="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-300"
 				></div>
 			</svelte:element>
+
+			<a
+				href="/ccb/locked/leaderboard"
+				class="group relative border border-base-content/20 p-4 hover:border-primary transition-colors cursor-pointer bg-base-200/50"
+			>
+				<div class="flex justify-between items-start">
+					<div>
+						<div class="font-mono text-xs opacity-50 mb-1">// ██████ LEADERBOARD</div>
+						<div class="font-display text-lg uppercase">██ 排行榜</div>
+					</div>
+					<span
+						class="text-xl text-primary transition-transform duration-200 group-hover:translate-x-1"
+						>→</span
+					>
+				</div>
+				<div
+					class="absolute bottom-0 left-0 w-0 h-1 bg-primary group-hover:w-full transition-all duration-300"
+				></div>
+			</a>
 		</div>
 	</div>
 

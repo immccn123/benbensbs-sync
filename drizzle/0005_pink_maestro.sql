@@ -1,0 +1,1 @@
+CREATE INDEX "ccb_user_stat_score_idx" ON "ccb_user_stat" USING btree ("score");

@@ -192,7 +192,7 @@
 				class="text-xs font-bold uppercase tracking-[0.2em] hover:text-primary transition-colors"
 				>← 返回</a
 			>
-			<span class="text-xs opacity-30">·</span>
+			<span class="text-xs opacity-30">|</span>
 			<span class="text-xs font-bold uppercase tracking-[0.2em]">██████ MODE</span>
 		</CcbHeader>
 
