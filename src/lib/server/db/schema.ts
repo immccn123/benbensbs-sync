@@ -127,3 +127,28 @@ export const ccbUserStat = pgTable(
 	},
 	(t) => [index("ccb_user_stat_score_idx").on(t.score)],
 );
+
+export const feedExport = pgTable(
+	"feed_export",
+	{
+		id: serial("id").primaryKey(),
+		userId: integer("user_id")
+			.notNull()
+			.references(() => user.id, { onDelete: "cascade" }),
+		luoguUid: varchar("luogu_uid", { length: 32 }).notNull(),
+		luoguUsername: varchar("luogu_username", { length: 128 }).notNull(),
+		status: varchar("status", { length: 16 }).notNull().default("pending"),
+		data: text("data"),
+		fileSize: integer("file_size").notNull().default(0),
+		error: text("error"),
+		createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+		startedAt: timestamp("started_at", { withTimezone: true }),
+		completedAt: timestamp("completed_at", { withTimezone: true }),
+	},
+	(t) => [
+		index("feed_export_user_created_idx").on(t.userId, t.createdAt),
+		index("feed_export_status_idx").on(t.status),
+	],
+);
+
+export type FeedExport = InferSelectModel<typeof feedExport>;

@@ -43,6 +43,13 @@
       "when": 1786270128892,
       "tag": "0005_pink_maestro",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1788708209923,
+      "tag": "0006_fearless_kronos",
+      "breakpoints": true
     }
   ]
 }

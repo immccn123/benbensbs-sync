@@ -1,6 +1,7 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 
 import type { User } from "$lib/server/db/schema";
+import type { LuoguAccount } from "$lib/server/jwt/auth";
 
 // for information about these interfaces
 declare global {
@@ -14,6 +15,7 @@ declare global {
 		// interface Platform {}
 		interface Locals {
 			user?: User;
+			luoguAccount?: LuoguAccount | null;
 			sessionInvalid?: boolean;
 		}
 	}

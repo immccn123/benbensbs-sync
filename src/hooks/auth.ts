@@ -1,6 +1,6 @@
 import { db } from "$lib/server/db";
 import { user, revokedSession } from "$lib/server/db/schema";
-import { verifySsoToken } from "$lib/server/jwt/auth";
+import { verifySsoToken, extractLuoguAccount } from "$lib/server/jwt/auth";
 import type { Handle } from "@sveltejs/kit";
 import { eq } from "drizzle-orm";
 
@@ -42,6 +42,7 @@ export const authHandle: Handle = async ({ event, resolve }) => {
 				displayName: payload.display_name ?? loginUser.displayName,
 				avatarUrl: payload.avatar_url ?? loginUser.avatarUrl,
 			};
+			event.locals.luoguAccount = extractLuoguAccount(payload);
 		} catch (e) {
 			event.cookies.delete("sso_token", { path: "/" });
 		}
